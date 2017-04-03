@@ -10,6 +10,10 @@ public class Main {
 		List<String> hltvLinkList = Scanner.getMatchesWithHltvLink("http://www.hltv.org/?pageid=188&statsfilter=2825");
 		List<MatchBean> matchBeans = Scanner.matchBeansFromLinkList(hltvLinkList);
 		
+		System.out.println("");
+		System.out.println("Total matches gathered: "+matchBeans.size());
+		System.out.println("");
+		
 		MatchBeanHelper.printChancesOfWinningFollowingTwoRoundsAfterPistolWin(matchBeans);
 		MatchBeanHelper.printChancesOfWinningFollowingTwoRoundsAfterCleanPistolWin(matchBeans);
 		MatchBeanHelper.printChancesOfWinningTwoRoundsAfterLosingFirstThree(matchBeans);

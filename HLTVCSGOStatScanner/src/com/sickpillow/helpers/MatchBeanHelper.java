@@ -167,7 +167,9 @@ public class MatchBeanHelper {
 	public static void printChancesOfWinningBothFirstThree(List<MatchBean> matchBeans) {
 		int wonBothFirstThreeAmount = 0;
 		int didntWinBothAmount = 0;
-
+		
+		System.out.println("matchbean list size: "+matchBeans.size());
+		
 		for (MatchBean matchBean : matchBeans) {
 			HalfBean half1 = matchBean.getHalf1();
 			HalfBean half2 = matchBean.getHalf2();
@@ -179,7 +181,7 @@ public class MatchBeanHelper {
 
 				if (didTeam1WinBothFirstThree || didTeam2WinBothFirstThree) {
 					wonBothFirstThreeAmount++;
-				}else {
+				}else if (!didTeam1WinBothFirstThree && !didTeam2WinBothFirstThree){
 					didntWinBothAmount++;
 				}
 
@@ -216,10 +218,10 @@ public class MatchBeanHelper {
 					if (isPistolCleanHalf1 && isPistolCleanHalf2) {
 						wonBothFirstThreeCleanAmount++;
 					}
-				}else {
+				}else if (!didTeam1WinBothFirstThree && !didTeam2WinBothFirstThree) {
 					didntWinFirstThreeCleanAmount++;
 				}
-
+				
 			}catch (NullPointerException e) {
 				continue;
 			}
