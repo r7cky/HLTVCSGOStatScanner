@@ -11,7 +11,7 @@ public class Main {
 		List<MatchBean> matchBeans = Scanner.matchBeansFromLinkList(hltvLinkList);
 		
 		System.out.println("");
-		System.out.println("Total matches gathered: "+matchBeans.size());
+		System.out.println("Total matches gathered: " + matchBeans.size());
 		System.out.println("");
 		
 		MatchBeanHelper.printChancesOfWinningFollowingTwoRoundsAfterPistolWin(matchBeans);
