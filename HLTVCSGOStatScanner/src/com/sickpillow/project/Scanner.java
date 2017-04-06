@@ -62,7 +62,7 @@ public class Scanner {
 		return hltvLinkList;
 	}
 	
-	public static MatchBean scanHLTVMatch(String hltvLink) throws IOException {
+	public static MatchBean scanHltvMatch(String hltvLink) throws IOException {
 		//if link doesn't start with hltv then return null
 		if (!hltvLink.startsWith("http://www.hltv.org") || hltvLink.isEmpty() || hltvLink == null) {
 			System.out.println("Please enter a valid hltv link!");
@@ -83,7 +83,7 @@ public class Scanner {
 		List<MatchBean> matchBeans = new ArrayList<>();
 
 		for (String hltvLink : hltvLinkList) {
-			MatchBean matchBean = scanHLTVMatch(hltvLink);
+			MatchBean matchBean = scanHltvMatch(hltvLink);
 
 			if (!matchBean.isFirstHalfTotalUnder15()) {
 				matchBeans.add(matchBean);

@@ -9,7 +9,124 @@ import com.sickpillow.models.MatchBean;
 
 public class MatchBeanHelper {
 	
-	public static void printChancesOfWinningFollowingTwoRoundsAfterPistolWin(List<MatchBean> matchBeans) {
+	public static void printChancesOfCtWinningFollowingTwoRoundsAfterNoDefusePistolWin(List<MatchBean> matchBeans) {
+		int wonFirstThreeNoDefuseAmount = 0;
+		int upsetSecondOrThirdRoundAmount = 0;
+
+		for (MatchBean matchBean : matchBeans) {
+			
+			HalfBean half1 = matchBean.getHalf1();
+			HalfBean half2 = matchBean.getHalf2();
+			
+			boolean isPistolCleanHalf1 = half1.isCtCleanWinForRound(1);
+			boolean isPistolCleanHalf2 = half2.isCtCleanWinForRound(1);
+			
+			if (isPistolCleanHalf1) {
+				if (half1.isDidCtWinFirstThreeRounds()) {
+					wonFirstThreeNoDefuseAmount++;
+				}else {
+					upsetSecondOrThirdRoundAmount++;
+				}
+			}
+			
+			//the reason we use a try here is because if the second half is under 3 rounds it can cause a crash
+			try {
+				if (isPistolCleanHalf2) {
+					if (half2.isDidCtWinFirstThreeRounds()) {
+						wonFirstThreeNoDefuseAmount++;
+					}else {
+						upsetSecondOrThirdRoundAmount++;
+					}
+				}
+			}catch (NullPointerException e) {
+				
+			}
+		}
+		
+		System.out.println("Results of CT winning next two after winning pistol with no bomb defuse on pistol round:");
+		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonFirstThreeNoDefuseAmount, upsetSecondOrThirdRoundAmount);
+		System.out.println("");
+	}
+	
+	public static void printChancesOfCtWinningFollowingTwoRoundsAfterDefusePistolWin(List<MatchBean> matchBeans) {
+		int wonFirstThreeDefuseAmount = 0;
+		int upsetSecondOrThirdRoundAmount = 0;
+
+		for (MatchBean matchBean : matchBeans) {
+			
+			HalfBean half1 = matchBean.getHalf1();
+			HalfBean half2 = matchBean.getHalf2();
+			
+			boolean isPistolDefuseHalf1 = half1.isCtBombDefuseWinForRound(1);
+			boolean isPistolDefuseHalf2 = half2.isCtBombDefuseWinForRound(1);
+			
+			if (isPistolDefuseHalf1) {
+				if (half1.isDidCtWinFirstThreeRounds()) {
+					wonFirstThreeDefuseAmount++;
+				}else {
+					upsetSecondOrThirdRoundAmount++;
+				}
+			}
+			
+			//the reason we use a try here is because if the second half is under 3 rounds it can cause a crash
+			try {
+				if (isPistolDefuseHalf2) {
+					if (half2.isDidCtWinFirstThreeRounds()) {
+						wonFirstThreeDefuseAmount++;
+					}else {
+						upsetSecondOrThirdRoundAmount++;
+					}
+				}
+			}catch (NullPointerException e) {
+				
+			}
+		}
+		
+		System.out.println("Results of CT winning next two after winning pistol with bomb defuse on pistol round:");
+		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonFirstThreeDefuseAmount, upsetSecondOrThirdRoundAmount);
+		System.out.println("");
+	}
+	
+	public static void printChancesOfTWinningFollowingTwoRoundsAfterPistolWin(List<MatchBean> matchBeans) {
+		int wonFirstThreeAmount = 0;
+		int upsetSecondOrThirdRoundAmount = 0;
+
+		for (MatchBean matchBean : matchBeans) {
+			
+			HalfBean half1 = matchBean.getHalf1();
+			HalfBean half2 = matchBean.getHalf2();
+			
+			boolean isTPistolHalf1 = half1.isTWinForRound(1);
+			boolean isTPistolHalf2 = half2.isTWinForRound(1);
+
+			if (isTPistolHalf1) {
+				if (half1.isDidTWinFirstThreeRounds()) {
+					wonFirstThreeAmount++;
+				}else {
+					upsetSecondOrThirdRoundAmount++;
+				}
+			}
+
+			//the reason we use a try here is because if the second half is under 3 rounds it can cause a crash
+			try {
+				if (isTPistolHalf2) {
+					if (half2.isDidTWinFirstThreeRounds()) {
+						wonFirstThreeAmount++;
+					}else {
+						upsetSecondOrThirdRoundAmount++;
+					}
+				}
+			}catch (NullPointerException e) {
+
+			}
+		}
+		
+		System.out.println("Results of T winning next two after winning pistol:");
+		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonFirstThreeAmount, upsetSecondOrThirdRoundAmount);
+		System.out.println("");
+	}
+	
+	public static void printChancesOfWinningFollowingTwoRoundsAfterPistolWinOverall(List<MatchBean> matchBeans) {
 		int wonFirstThreeAmount = 0;
 		int upsetSecondOrThirdRoundAmount = 0;
 
@@ -36,12 +153,12 @@ public class MatchBeanHelper {
 			}
 		}
 		
-		System.out.println("Statistics of winning the following two rounds after a pistol win:");
+		System.out.println("Results of winning the following two rounds after a pistol win, overall:");
 		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonFirstThreeAmount, upsetSecondOrThirdRoundAmount);
 		System.out.println("");
 	}
 	
-	public static void printChancesOfWinningFollowingTwoRoundsAfterCleanPistolWin(List<MatchBean> matchBeans) {
+	public static void printChancesOfWinningFollowingTwoRoundsAfterCleanPistolWinOverall(List<MatchBean> matchBeans) {
 		int wonFirstThreeWithCleanPistolAmount = 0;
 		int upsetSecondOrThirdRoundAmount = 0;
 
@@ -72,7 +189,7 @@ public class MatchBeanHelper {
 			}
 		}
 		
-		System.out.println("Statistics of winning the following two rounds after a clean pistol win:");
+		System.out.println("Results of winning the following two rounds after a clean pistol win:");
 		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonFirstThreeWithCleanPistolAmount, upsetSecondOrThirdRoundAmount);
 		System.out.println("");
 	}
@@ -104,7 +221,7 @@ public class MatchBeanHelper {
 
 		}
 		
-		System.out.println("Statistics of winning fourth and fifth round consecutively if first three are lost:");
+		System.out.println("Results of winning fourth and fifth round consecutively if first three are lost:");
 		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(timesWhereTeamWonTwoRoundsAfterLosingFirstThreeClean, timesWhereTeamLostFollowingRoundAfterWinningGun);
 		System.out.println("");
 	}
@@ -135,7 +252,7 @@ public class MatchBeanHelper {
 			
 		}
 		
-		System.out.println("Statistics of winning first half if first three rounds are won:");
+		System.out.println("Results of winning first half if first three rounds are won:");
 		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonFirstHalfAfterFirstThreeAmount, lostFirstHalfAfterFirstThreeAmount);
 		System.out.println("");
 	}
@@ -168,8 +285,6 @@ public class MatchBeanHelper {
 		int wonBothFirstThreeAmount = 0;
 		int didntWinBothAmount = 0;
 		
-		System.out.println("matchbean list size: "+matchBeans.size());
-		
 		for (MatchBean matchBean : matchBeans) {
 			HalfBean half1 = matchBean.getHalf1();
 			HalfBean half2 = matchBean.getHalf2();
@@ -191,7 +306,7 @@ public class MatchBeanHelper {
 
 		}
 		
-		System.out.println("Statistics of winning first three rounds for both halves:");
+		System.out.println("Results of winning first three rounds for both halves:");
 		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonBothFirstThreeAmount, didntWinBothAmount);
 		System.out.println("");
 	}
@@ -206,7 +321,6 @@ public class MatchBeanHelper {
 
 			boolean isPistolCleanHalf1 = half1.isCleanWinForRound(1);
 			boolean isPistolCleanHalf2 = half2.isCleanWinForRound(1);
-			
 			
 			try {
 
@@ -227,7 +341,7 @@ public class MatchBeanHelper {
 			}
 		}
 		
-		System.out.println("Statistics of winning first three rounds for both halves with clean pistol only:");
+		System.out.println("Results of winning first three rounds for both halves with clean pistol only:");
 		Helper.printRatioAndStdAnd95ConfidenceForWinsAndLosses(wonBothFirstThreeCleanAmount, didntWinFirstThreeCleanAmount);
 		System.out.println("");
 	}

@@ -4,9 +4,11 @@ This project scans all the CSGO matches for big events in 2016 using HLTV's matc
 
 These are the statistcs the project currently prints out:
 
-- Chances of winning following two rounds after pistol win
-- Chances of winning following two rounds after clean pistol win (no bomb plant for Ts = no extra money to force)
-- Chances of winning two consecutive rounds after losing first three
+- Chances of CT winning next two after winning pistol with no bomb defuse on pistol round
+- Chances of CT winning next two after winning pistol with bomb defuse on pistol round
+- Chances of T winning next two after winning pistol
+- Chances of winning following two rounds after pistol win (overall)
+- Chances of winning two consecutive rounds after losing first three (round 4&5)
 - Chances of winning first half (greater than or equal to 8 rounds) if first three rounds are won
 - The average amount of rounds won in the first half when a team wins first three rounds + the variance
 - Chances of winning the first three rounds of both halves
