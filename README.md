@@ -1,5 +1,7 @@
 # HLTVCSGOStatScanner
 
+This project is outdated, will work on it in the future.
+
 This project scans all the CSGO matches for big events in 2016 using HLTV's match statistics.
 
 These are the statistcs the project currently prints out:
